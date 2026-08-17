@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор режима</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+        h1 {
+            color: #1a2b3c;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .btn {
+            display: block;
+            padding: 16px 20px;
+            background: #1976d2;
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background: #0d47a1;
+        }
+        .btn-secondary {
+            background: #2e7d32;
+        }
+        .btn-secondary:hover {
+            background: #1b5e20;
+        }
+        .footer {
+            margin-top: 25px;
+            color: #888;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🤖 Выберите режим работы</h1>
+    <div class="btn-group">
+        <a href="/rag" class="btn">📄 Поиск по документам (RAG)</a>
+        <a href="/sql" class="btn btn-secondary">🗄️ Запрос к базе данных (SQL)</a>
+    </div>
+    <div class="footer">Агент поможет вам найти информацию</div>
+</div>
+</body>
+</html>

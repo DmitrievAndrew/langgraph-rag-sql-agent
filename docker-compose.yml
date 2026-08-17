@@ -1,0 +1,51 @@
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:25.7
+    container_name: clickhouse
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    environment:
+      CLICKHOUSE_SKIP_USER_SETUP: 1
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse
+
+  # (закомментирован для хостового Ollama)
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: ollama
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama-data:/root/.ollama
+  #   command: serve
+  #   restart: unless-stopped
+
+  app:
+    build: .
+    container_name: langgraph-agent
+    network_mode: host
+    environment:
+      - CLICKHOUSE_HOST=localhost
+      - CLICKHOUSE_PORT=8123
+      - OLLAMA_HOST=localhost
+      - OLLAMA_PORT=11434
+      - LLM_MODEL=llama3.2:3b
+      - EMBEDDINGS_MODEL=nomic-embed-text
+      - CHROMA_PERSIST_DIR=/app/chroma_db
+      - UPLOAD_FOLDER=/app/uploads
+    volumes:
+      - chroma-data:/app/chroma_db
+      - ./uploads:/app/uploads
+    depends_on:
+      - clickhouse
+    restart: unless-stopped
+
+volumes:
+  clickhouse-data:
+  # ollama-data:
+  chroma-data:

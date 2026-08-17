@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .upload-section {
+            display: {% if mode == 'rag' %}block{% else %}none{% endif %};
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 16px;
+            color: #1976d2;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        /* для красоты добавим отступ сверху */
+        .container {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="/" class="back-link">← На главную</a>
+    <h1>{{ title }}</h1>
+    <div class="chat-section">
+        <div id="chat-log" class="chat-log"></div>
+        <div class="chat-input">
+            <input type="text" id="question" placeholder="Введите вопрос..." />
+            <button id="send-btn">Отправить</button>
+        </div>
+    </div>
+
+    <!-- Секция загрузки документов (видна только в RAG) -->
+    <div class="upload-section">
+        <h2>Загрузить документ</h2>
+        <form id="upload-form" enctype="multipart/form-data">
+            <input type="file" id="file-input" name="file" accept=".txt,.pdf,.docx" />
+            <button type="submit">Загрузить</button>
+        </form>
+        <div id="upload-message"></div>
+    </div>
+</div>
+
+<script>
+    const mode = "{{ mode }}";
+</script>
+<script src="/static/script.js"></script>
+</body>
+</html>
